@@ -1,5 +1,6 @@
 import React from 'react';
 import Wheel from './wheel';
+import Screen from './screen';
 
 class App extends React.Component{
   constructor(){
@@ -20,8 +21,16 @@ class App extends React.Component{
 
   onHandleRotate=()=>{
   }
-  onMenueClick=()=>{
-
+  onMenuClick=(props)=>{
+    console.log('menu clicked');
+    console.log(props);
+    const {menu}=this.state;
+    this.setState({
+      menu:!menu
+    })
+      const displayMenu=document.getElementById('menu');
+      displayMenu.classList.toggle('display');
+      console.log(displayMenu.classList);
   }
   handleInnerCircleClick=()=>{
 
@@ -30,7 +39,8 @@ class App extends React.Component{
     console.log(this.state);
     return(
       <div className="App">
-        <Wheel />
+        <Screen menu={this.state.menu} submenu={this.state.submenu}/>
+        <Wheel onMenuClick={this.onMenuClick}/>
       </div>
     )
   };

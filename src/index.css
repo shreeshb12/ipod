@@ -6,12 +6,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #f1f1f1;
+  z-index: 999;
+}
+*{
+  transition: all 0.5s ease-in-out, transform 1s ease-in-out;
 }
 /* ---- app styling ---- */
 .App{
   position: relative;
-  align-items: center;
-  justify-content: center;
   height: 420px;
   width: 250px;
   padding: 10px 10px 10px 10px;
@@ -38,8 +40,8 @@ body {
 
 .outer-circle{
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   background-color: white;
 
@@ -51,33 +53,34 @@ body {
 .menu-btn{
   position: absolute;
   top: 12px;
-  font-size: 20px;
+  font-size: 1rem;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: black;
+  color: #607d8b;
 }
 .play-pause-btn{
   position: absolute;
   bottom: 10px; 
-  height: 30px;
-  width: 30px;
+  height: 22px;
+  width: 22px;
 }
 .prev-btn{
   position: absolute;
   left: 10px;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
 }
 .next-btn{
   position: absolute;
   right: 10px;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
 }
 .inner-circle{
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   background-color: grey;
+  box-shadow: inset 3px 7px 10px 5px #6d6767;
 }
 
 .menu-btn, .play-pause-btn, .prev-btn, .next-btn:hover, .inner-circle{
@@ -86,31 +89,42 @@ body {
 
 /* ---- screen styling ---- */
 .screen-container{
+  position: relative;
   height: 200px;
-  width: 250px;
+  width: 240px;
   /* border: 2px solid black; */
-  /* margin: 0 auto; */
+  margin: 0 auto;
+  margin-top: 5px;
   margin-bottom: 5px;
   border-radius: 5px;
-  background-image: url(https://i.pinimg.com/originals/6a/96/b2/6a96b2d2771c2c80139ef67545cccf6b.jpg);
+  background-color: #f1f1f1;
+  /* background-image: url(https://i.pinimg.com/originals/6a/96/b2/6a96b2d2771c2c80139ef67545cccf6b.jpg); */
   background-repeat: no-repeat;
   /* background-size: auto; */
   background-size: cover;
   background-position: center;
-  box-shadow: 5px 5px 5px black;
+  box-shadow: inset 0px 0px 15px rgb(0, 0, 0);
+  overflow: hidden;
 }
 #git{
   position: absolute;
-  right: 10px;
-  height: 30px;
-  width: 30px;
+  top: 5px;
+  right: 5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 2px 2px #9c9494;
   /* z-index: -1; */
 }
 .menu{
-  height: 195px;
+  position: absolute;
+  height: 197px;
   width: 140px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   background-color: #b9b8b8;
+  transform: translateX(-100%);
 }
 .heading{
   padding: 5px;
@@ -147,4 +161,8 @@ body {
 .unselect{
   /* background-color: white; */
   color: black;
+}
+.display{
+  display: block;
+  transform: translateX(0)!important;
 }
