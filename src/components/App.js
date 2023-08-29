@@ -2,6 +2,7 @@ import React from 'react';
 import Wheel from './wheel';
 import Screen from './screen';
 import ZingTouch from 'zingtouch';
+import song from '../songs/onmyway.mp3';
 
 class App extends React.Component{
   constructor(){
@@ -13,7 +14,8 @@ class App extends React.Component{
       submenu_options:['allsongs','album','artist'],
       selected_item : 0,
       angle : 0,
-      active_item:"allsongs"
+      active_item:"allsongs",
+      play:false,
     }
   }
 
@@ -58,7 +60,28 @@ class App extends React.Component{
         }
       })
   }
-
+  playMusic=(play)=>{
+    const {menu,submenu}=this.state;
+    let playMusic=document.getElementById('audio');
+    const poster=document.getElementById('poster');
+    if(!menu && !submenu)
+    {
+      poster.classList.toggle('rotate');
+      if(!play)
+      {
+        playMusic.play();
+        this.setState({
+          play:!play}
+        )
+      }
+      else{
+        playMusic.pause();
+        this.setState({
+          play:!play}
+        )
+      }
+    }
+  }
   onMenuClick=(props)=>{
     console.log('menu clicked');
     const {menu,submenu}=this.state;
@@ -80,8 +103,8 @@ class App extends React.Component{
       })
   }
 
-  handleInnerCircleClick=(props)=>{
-    let {clicked_item,menu}=this.state;
+  handleInnerCircleClick=async (props)=>{
+    let {clicked_item,menu,submenu,active_item}=this.state;
     clicked_item=props.target.dataset.id
     this.setState({
       clicked_item
@@ -99,17 +122,31 @@ class App extends React.Component{
         })
       }
     }
+    if(submenu)
+    {
+        this.setState({
+          active_item:clicked_item,
+          submenu:false,
+        })
+    }
+    if(active_item==='allsongs')
+    {
+      this.playMusic(this.state.play);
+    }
   }
   render(){
-    const{menu_options,menu,submenu,selected_item,submenu_options,active_item}=this.state;
+    const{menu_options,menu,submenu,selected_item,submenu_options,active_item,playMusic}=this.state;
     return(
       <div className="App">
+        <audio src={song} loop id='audio'>
+        </audio>
         <Screen menu={menu} submenu={submenu} select={menu?menu_options[selected_item]:submenu_options[selected_item]} active_item={active_item}/>
         <Wheel 
         onMenuClick={this.onMenuClick} 
         onHandleRotate={this.onHandleRotate} 
         handleInnerCircleClick={this.handleInnerCircleClick}
-        dataId={menu_options[selected_item]}/>
+        dataId={menu?menu_options[selected_item]:submenu_options[selected_item]}
+        playMusic={playMusic}/>
       </div>
     )
   };

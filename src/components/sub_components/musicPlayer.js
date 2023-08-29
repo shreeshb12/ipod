@@ -3,18 +3,13 @@ import song from '../../songs/onmyway.mp3';
 import backgroundImage from '../../images/musicplayerbackground.jpg';
 
 const MusicPlayer = () => {
-    
-    useEffect(()=>{
-        
-    })
         return(
-                <>
-                    <div>
+                    <div id="music player">
                         <div id='background'>
                             <img src={backgroundImage} alt="background" className="backgroundImage"/>
                         </div>
                         {/* song poster */}
-                        <img src={require('../../images/alanwalker.jpg')} style={styles.songPoster} alt="on my way"></img>
+                        <img src={require('../../images/alanwalker.jpg')} style={styles.songPoster} alt="on my way" className="" id="poster"/>
                         <div style={styles.songDetailsDiv}>
                             {/* song details div */}
                             <h2>On My Way</h2>
@@ -25,8 +20,6 @@ const MusicPlayer = () => {
                             </div>
                         </div>
                     </div>
-                    <br></br>
-                </>
         )
 }
 const styles={
@@ -37,7 +30,8 @@ const styles={
         width:'100px',
         borderRadius:'50%',
         top:'25%',
-        left:'20px'
+        left:'20px',
+        border:'2px solid #ffffff'
     },
     songDetailsDiv:{
         position:'absolute',

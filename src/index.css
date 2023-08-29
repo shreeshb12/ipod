@@ -129,6 +129,7 @@ body {
   background-color: #b9b8b8;
   transform: translateX(-100%);
   overflow: scroll;
+  z-index: 999;
 }
 .menu ul{
   margin-top: 10px;
@@ -206,4 +207,17 @@ nav a{
   position: absolute;
   height: 100%;
   width: 100%;
+}
+
+.rotate{
+  animation: rotation 5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
