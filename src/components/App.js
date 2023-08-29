@@ -2,6 +2,7 @@ import React from 'react';
 import Wheel from './wheel';
 import Screen from './screen';
 import ZingTouch from 'zingtouch';
+
 class App extends React.Component{
   constructor(){
     super();
@@ -9,30 +10,31 @@ class App extends React.Component{
       menu : false,
       menu_options : ['song','games','setting','developer'],
       submenu : false,
-      submenu_options:['allsong','album','artist'],
+      submenu_options:['allsongs','album','artist'],
       selected_item : 0,
-      angle : 0
+      angle : 0,
+      active_item:"allsongs"
     }
   }
 
   componentDidMount(){
-    console.log('outer circle rotate')
     const target=document.getElementById('outer-circle')
     const zt=new ZingTouch.Region(target);
       zt.bind(target,'rotate',(e)=>{
-        if(this.state.menu)
+        if(this.state.menu || this.state.submenu)
         {
-          let {menu_options,selected_item}=this.state;
+          let {menu_options,selected_item,menu,submenu_options}=this.state;
           let dist=e.detail.distanceFromLast;
           let angle=this.state.angle+dist;
           this.setState({
             angle
           })
+         const length=menu?menu_options.length:submenu_options.length;
 
           if(angle>60)
           {
             selected_item+=1;
-            if(selected_item===menu_options.length)
+            if(selected_item===length)
             {
                 selected_item=0
             }
@@ -41,13 +43,12 @@ class App extends React.Component{
               angle:0
             });
           }
-
           if(angle<-60)
           {
             selected_item-=1;
             if(selected_item<0)
             {
-                selected_item=3
+                selected_item=length-1
             }
             this.setState({
               selected_item:selected_item,
@@ -60,28 +61,55 @@ class App extends React.Component{
 
   onMenuClick=(props)=>{
     console.log('menu clicked');
-    const {menu}=this.state;
-    this.setState({
-      menu:!menu,
-      angle:0,
-      selected_item:0
-    })
-    const displayMenu=document.getElementById('menu');
-    displayMenu.classList.toggle('display');
+    const {menu,submenu}=this.state;
+    // const displayMenu=document.getElementById('menu');
+    // displayMenu.classList.toggle('display');
+    if(submenu)
+    {
+      this.setState({
+        submenu:!submenu,
+        angle:0,
+        selected_item:0
+      })
+      return;
+    }
+      this.setState({
+        menu:!menu,
+        angle:0,
+        selected_item:0
+      })
   }
 
-  handleInnerCircleClick=()=>{
-    console.log("Display"+this.state.menu_options[this.state.selected_item]);
+  handleInnerCircleClick=(props)=>{
+    let {clicked_item,menu}=this.state;
+    clicked_item=props.target.dataset.id
+    this.setState({
+      clicked_item
+    })
+    if(menu)
+    {
+      if(clicked_item==='song')
+      {
+        console.log("Display Submenu");
+        this.setState({
+          menu:false,
+          submenu:true,
+          angle:0,
+          selected_item:0
+        })
+      }
+    }
   }
   render(){
-    const{menu_options,menu,submenu,selected_item}=this.state;
+    const{menu_options,menu,submenu,selected_item,submenu_options,active_item}=this.state;
     return(
       <div className="App">
-        <Screen menu={menu} submenu={submenu} select={menu_options[selected_item]}/>
+        <Screen menu={menu} submenu={submenu} select={menu?menu_options[selected_item]:submenu_options[selected_item]} active_item={active_item}/>
         <Wheel 
         onMenuClick={this.onMenuClick} 
         onHandleRotate={this.onHandleRotate} 
-        handleInnerCircleClick={this.handleInnerCircleClick}/>
+        handleInnerCircleClick={this.handleInnerCircleClick}
+        dataId={menu_options[selected_item]}/>
       </div>
     )
   };

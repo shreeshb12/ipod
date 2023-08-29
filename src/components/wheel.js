@@ -9,7 +9,7 @@ const Wheel = (props) =>{
           <img id="play-pause-btn" className="play-pause-btn" src={require('../images/play-pause.png')} alt="play-pause-btn"/>
           <img id="prev-btn" className="prev-btn" src={require('../images/prev.png')} alt="prev-btn"/>
           <img id="next-btn" className="next-btn" src={require('../images/next.png')} alt="next-btn"/>
-          <div id="inner-circle" className="inner-circle" onClick={props.handleInnerCircleClick}></div>
+          <div id="inner-circle" className="inner-circle" onClick={props.handleInnerCircleClick} data-id={props.dataId}></div>
         </div>
       </div>
     );
