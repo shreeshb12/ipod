@@ -66,6 +66,25 @@ class App extends React.Component{
           }
         }
       })
+
+      // to handle tap events on mobile devices as zingtouch prevents the click events on target 
+      // handle menu tap
+      const menuTarget=document.getElementById('menu-btn');
+      zt.bind(menuTarget,'tap',(e)=>{
+        this.onMenuClick(e);
+      })
+
+      // handle innercircle tap
+      const innerCircleTarget=document.getElementById('inner-circle');
+      zt.bind(innerCircleTarget,'tap',(e)=>{
+        this.handleInnerCircleClick(e);
+      })
+
+      // handle play and pause tap
+      const playAndPause=document.getElementById('play-pause-btn')
+      zt.bind(playAndPause,'tap',(e)=>{
+        this.playMusic();
+      })
   }
 
   // play and pause the music
@@ -121,6 +140,7 @@ class App extends React.Component{
   handleInnerCircleClick=async (props)=>{
     let {clicked_item,menu,submenu,active_item}=this.state;
 
+    props.stopPropagation(onclick);
     // check which item is selected and set the state of clicked_item
     clicked_item=props.target.dataset.id
     this.setState({

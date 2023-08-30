@@ -6,10 +6,10 @@ const Developer=()=>{
             <img src="https://avatars.githubusercontent.com/u/102280454?v=4" alt="developer" style={styles.developerImage} className="animate__animated animate__fadeInLeft "/>
             <h1 style={styles.developerName} className="animate__animated animate__fadeIn animate__delay-1s" >Shreesh Badiger
                 <div className="social-icons" style={styles.developerSocialIcons}>
-                    <a href="https://github.com/shreeshb12" target="_blank" rel="noreferrer"><i class="fa-brands fa-github" style={styles.github}></i></a>
-                    <a href="https://www.linkedin.com/in/shreeshbadiger1227/" target="_blank" rel="noreferrer"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/nimma_shreesh/" target="_blank" rel="noreferrer"><i class="fa-brands fa-instagram" style={styles.instagram}></i></a>
-                    <a href="https://www.facebook.com/shreesh.badiger/" target="_blank" rel="noreferrer"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://github.com/shreeshb12" target="_blank" rel="noreferrer"><i className="fa-brands fa-github" style={styles.github}></i></a>
+                    <a href="https://www.linkedin.com/in/shreeshbadiger1227/" target="_blank" rel="noreferrer"><i className="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/nimma_shreesh/" target="_blank" rel="noreferrer"><i className="fa-brands fa-instagram" style={styles.instagram}></i></a>
+                    <a href="https://www.facebook.com/shreesh.badiger/" target="_blank" rel="noreferrer"><i className="fa-brands fa-facebook"></i></a>
                 </div>
             </h1>
             
