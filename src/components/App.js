@@ -133,7 +133,7 @@ class App extends React.Component{
       // Display the submenu if the clicked item is song
       if(clicked_item==='song')
       {
-        console.log("Display Submenu");
+        // console.log("Display Submenu");
         this.setState({
           menu:false,
           submenu:true,
@@ -141,11 +141,11 @@ class App extends React.Component{
           selected_item:0
         })
       }
+      // activate the clicked menu item
       this.setState({
         active_item:clicked_item,
         menu:false,
       })
-      console.log(clicked_item+" "+this.state.active_item);
     }
 
     // handle click events of submenu items

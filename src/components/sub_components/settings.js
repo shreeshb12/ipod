@@ -3,7 +3,7 @@ import React from "react";
 const Settings=()=>{
     return(
         <div style={styles.settingsBackground}>
-            <i class="fas fa-cog"></i>
+            <i className="fas fa-cog"></i>
         </div>
     )
 }

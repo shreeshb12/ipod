@@ -129,7 +129,7 @@ body {
   background-color: #b9b8b8;
   transform: translateX(-100%);
   overflow: scroll;
-  z-index: 999;
+  z-index: 9999;
 }
 .menu ul{
   margin-top: 10px;
@@ -211,6 +211,19 @@ nav a{
 
 .rotate{
   animation: rotation 5s infinite linear;
+}
+
+.fa-brands{
+  transition: all 0.3s linear; 
+}
+.fa-brands:hover{
+ 
+  transform: scale(1.2);
+}
+
+.animate__animated.animate__fadeIn {
+  --animate-duration: 2s;
+  --animate-delay:1.2s;
 }
 
 @keyframes rotation {
