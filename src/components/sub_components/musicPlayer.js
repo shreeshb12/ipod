@@ -1,5 +1,5 @@
-import React, { useEffect,useState } from "react";
-import song from '../../songs/onmyway.mp3';
+import React from "react";
+// import song from '../../songs/onmyway.mp3';
 import backgroundImage from '../../images/musicplayerbackground.jpg';
 
 const MusicPlayer = () => {

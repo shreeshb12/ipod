@@ -2,17 +2,17 @@ import React from 'react';
 const Home=(props)=>{
     let {menu,submenu,select}=props;
     return(
-        <>
-        <nav>
-        <p>
-        <a href="https://github.com/shreeshb12" target="_blank" rel="noreferrer">
-            <img id="git" src="https://avatars.githubusercontent.com/u/102280454?v=4" alt="gitImage"  />
-            <span>Shreesh's ipod</span>
-        </a>
+        <>{/* fragments wrapper */}
         
-        </p>
-        <span id="battery"><img src={`${require('../../images/battery.png')}`} alt="battery"/> </span>
-       
+        {/* Notification bar */}
+        <nav>
+            <p>
+                <a href="https://github.com/shreeshb12" target="_blank" rel="noreferrer">
+                    <img id="git" src="https://avatars.githubusercontent.com/u/102280454?v=4" alt="gitImage"  />
+                    <span>Shreesh's ipod</span>
+                </a>
+            </p>
+            <span id="battery"><img src={`${require('../../images/battery.png')}`} alt="battery"/> </span>
         </nav>
       {/* if menu = true the show menu */}
         <div className={menu?"menu display":"menu"} id="menu">
@@ -24,7 +24,7 @@ const Home=(props)=>{
             <li id="developer" className={select==='developer'?'select':''} >Developer</li>
           </ul>
        </div>
-
+        {/* if submenu is true display submenu */}
         <div className={submenu?"menu display":"menu"}>
           <span className="heading">Music</span>
           <ul className="menu-list" id="menu-list">

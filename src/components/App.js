@@ -14,15 +14,19 @@ class App extends React.Component{
       submenu_options:['allsongs','album','artist'],
       selected_item : 0,
       angle : 0,
-      active_item:"allsongs",
+      active_item:"home",
       play:false,
     }
   }
 
   componentDidMount(){
+
+    // handle selection of menu and submenu options based on the rotation of outer circle
     const target=document.getElementById('outer-circle')
+    // set the zingtouch for outer-circle
     const zt=new ZingTouch.Region(target);
       zt.bind(target,'rotate',(e)=>{
+        // rorate only if menu or submenu is on
         if(this.state.menu || this.state.submenu)
         {
           let {menu_options,selected_item,menu,submenu_options}=this.state;
@@ -31,8 +35,10 @@ class App extends React.Component{
           this.setState({
             angle
           })
+          // calculate the no. of items based on menu and submenu
          const length=menu?menu_options.length:submenu_options.length;
 
+        //  if clockwise
           if(angle>60)
           {
             selected_item+=1;
@@ -45,6 +51,7 @@ class App extends React.Component{
               angle:0
             });
           }
+        // if anti-clockwise
           if(angle<-60)
           {
             selected_item-=1;
@@ -60,7 +67,10 @@ class App extends React.Component{
         }
       })
   }
-  playMusic=(play)=>{
+
+  // play and pause the music
+  playMusic=()=>{
+    let {play}=this.state
     const {menu,submenu}=this.state;
     let playMusic=document.getElementById('audio');
     const poster=document.getElementById('poster');
@@ -82,35 +92,45 @@ class App extends React.Component{
       }
     }
   }
+
+  // Handle Menu Click
   onMenuClick=(props)=>{
-    console.log('menu clicked');
+    // console.log('menu clicked');
     const {menu,submenu}=this.state;
-    // const displayMenu=document.getElementById('menu');
-    // displayMenu.classList.toggle('display');
+
+    // if submenu is on turn it off
     if(submenu)
     {
       this.setState({
-        submenu:!submenu,
+        submenu:false,
         angle:0,
         selected_item:0
       })
       return;
     }
-      this.setState({
-        menu:!menu,
-        angle:0,
-        selected_item:0
-      })
+
+    // handle menu state
+    this.setState({
+      menu:!menu,
+      angle:0,
+      selected_item:0
+    })
   }
 
+  // Handle InnerCircle click
   handleInnerCircleClick=async (props)=>{
     let {clicked_item,menu,submenu,active_item}=this.state;
+
+    // check which item is selected and set the state of clicked_item
     clicked_item=props.target.dataset.id
     this.setState({
       clicked_item
     })
+
+    // handle click events of main menu items
     if(menu)
     {
+      // Display the submenu if the clicked item is song
       if(clicked_item==='song')
       {
         console.log("Display Submenu");
@@ -121,7 +141,14 @@ class App extends React.Component{
           selected_item:0
         })
       }
+      this.setState({
+        active_item:clicked_item,
+        menu:false,
+      })
+      console.log(clicked_item+" "+this.state.active_item);
     }
+
+    // handle click events of submenu items
     if(submenu)
     {
         this.setState({
@@ -129,11 +156,15 @@ class App extends React.Component{
           submenu:false,
         })
     }
+
+    // handle play and pause 
     if(active_item==='allsongs')
     {
-      this.playMusic(this.state.play);
+      this.playMusic();
     }
   }
+
+  // render App component
   render(){
     const{menu_options,menu,submenu,selected_item,submenu_options,active_item,playMusic}=this.state;
     return(
@@ -145,6 +176,7 @@ class App extends React.Component{
         onMenuClick={this.onMenuClick} 
         onHandleRotate={this.onHandleRotate} 
         handleInnerCircleClick={this.handleInnerCircleClick}
+        playPause={this.playMusic}
         dataId={menu?menu_options[selected_item]:submenu_options[selected_item]}
         playMusic={playMusic}/>
       </div>
